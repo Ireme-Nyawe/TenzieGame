@@ -1,3 +1,7 @@
 export default function App() {
-  return "tenzie setup";
+  return (
+    <div className="slide">
+      <div className="element-container"></div>
+    </div>
+  );
 }
