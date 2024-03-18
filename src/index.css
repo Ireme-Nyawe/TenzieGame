@@ -41,13 +41,18 @@ body{
 }
 .roll-button{
   background: #5035FF;
-  width: 92px;
-  height: 36px;
+  width: 120px;
+  height: 50px;
   border: 0;
   border-radius: 5px;
   color: white;
   font-weight: bold;
   margin-top: 20px;
+  margin-top: 50px;
   cursor: pointer;
+
+}
+.roll-button:active{
+  background: #0B2434;
 
 }
