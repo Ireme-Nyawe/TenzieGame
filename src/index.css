@@ -39,3 +39,15 @@ body{
 .die-num{
   font-family: 2rem;
 }
+.roll-button{
+  background: #5035FF;
+  width: 92px;
+  height: 36px;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+
+}
