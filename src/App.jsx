@@ -6,18 +6,20 @@ export default function App() {
   function allDice() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push(Math.ceil(Math.random() * 6));
+      newDice.push({ value: Math.ceil(Math.random() * 6), isheld: false });
     }
     return newDice;
   }
-  function handleRoll(){
-    setDice(allDice())
+  function handleRoll() {
+    setDice(allDice());
   }
-  const diceElement = dice.map((die) => <Die value={die} />);
+  const diceElement = dice.map((die) => <Die value={die.value} />);
   return (
     <div className="slide">
       <div className="dice-container">{diceElement}</div>
-      <button className="roll-button" onClick={handleRoll}>Roll</button>
+      <button className="roll-button" onClick={handleRoll}>
+        Roll
+      </button>
     </div>
   );
 }
