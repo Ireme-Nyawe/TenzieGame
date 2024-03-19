@@ -34,7 +34,6 @@ body{
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: white;
 }
 .die-num{
   font-family: 2rem;
