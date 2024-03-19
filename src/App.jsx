@@ -4,19 +4,26 @@ import { nanoid } from "nanoid";
 
 export default function App() {
   const [dice, setDice] = useState(allDice());
+  function generateNewDice(){
+    return {
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid(),
+    }
+  }
   function allDice() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push({
-        value: Math.ceil(Math.random() * 6),
-        isHeld: false,
-        id: nanoid(),
-      });
+      newDice.push(generateNewDice());
     }
     return newDice;
   }
   function handleRoll() {
-    setDice(allDice());
+    setDice((olDice) =>
+      olDice.map((die) => {
+        return die.isHeld ? die : generateNewDice();
+      })
+    );
   }
   function holdDie(id) {
     setDice((olDice) =>
