@@ -1,9 +1,9 @@
 export default function Die(props) {
-  const styles ={
-    backgroundColor:props.isHeld?"#59E391":"white"
-  }
+  const styles = {
+    backgroundColor: props.isHeld ? "#59E391" : "white",
+  };
   return (
-    <div className="die-item" style={styles}>
+    <div className="die-item" style={styles} onClick={props.hold}>
       <h2 className="die-num">{props.value}</h2>
     </div>
   );
