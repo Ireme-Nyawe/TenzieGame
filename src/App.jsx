@@ -83,7 +83,8 @@ export default function App() {
     <>
       {tenzie && <Confetti />}
       <div className="slide">
-        <h1>Tenzies-Game</h1>
+
+        <h1>Dice-Game</h1>
         <p className="instructions">
           Roll until all dice are the same. Click each die to freeze it at its
           current value between rolls.

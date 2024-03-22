@@ -7,8 +7,8 @@ body{
   background: #0B2434;
 }
 .slide{
-  width: 500px;
-  height: 520px;
+  width: 520px;
+  height: 540px;
   background: #F5F5F5;
   position: fixed;
   top: 50%;
@@ -19,6 +19,7 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 30px;
 }
 .dice-container{
   display: grid;
