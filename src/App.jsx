@@ -7,11 +7,11 @@ export default function App() {
   const [tenzie, setTenzies] = useState(false);
   const [dice, setDice] = useState(allDice());
   const [currentRoll, setCurrentRoll] = useState(0);
-  const [manyRolls, setManyRolls] = useState(() => {
-    return JSON.parse(localStorage.getItem("manyRolls")) || 0;
-  });
+  const [manyRolls, setManyRolls] = useState(
+    JSON.parse(localStorage.getItem("manyRolls")) || 0
+  );
   const [fewRolls, setFewRolls] = useState(
-    () => JSON.parse(localStorage.getItem("fewRolls")) || 0
+    JSON.parse(localStorage.getItem("fewRolls")) || 0
   );
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
@@ -20,11 +20,16 @@ export default function App() {
     if (allHeld && allHaveSameValue) {
       setTenzies(true);
       // best rolls manipulation
-      const savedManyRolls = localStorage.getItem("manyRolls");
-      setManyRolls(savedManyRolls);
-
-      const savedFewRolls = localStorage.getItem("fewRolls");
-      setFewRolls(savedFewRolls);
+      if (manyRolls == 0 || fewRolls == 0) {
+        localStorage.setItem("manyRolls", currentRoll);
+        localStorage.setItem("fewRolls", currentRoll);
+      } else if (currentRoll > manyRolls) {
+        localStorage.setItem("manyRolls", currentRoll);
+      } else if (currentRoll < fewRolls) {
+        localStorage.setItem("fewRolls", currentRoll);
+      }
+      setManyRolls(JSON.parse(localStorage.getItem("manyRolls")));
+      setFewRolls(JSON.parse(localStorage.getItem("fewRolls")));
     } else {
       setTenzies(false);
     }
@@ -81,8 +86,7 @@ export default function App() {
         <h1>Tenzies-Game</h1>
         <p className="instructions">
           Roll until all dice are the same. Click each die to freeze it at its
-          current value between rolls. Curent Rolls
-          <sub className="current-rolls">({currentRoll})</sub>
+          current value between rolls.
         </p>
 
         <div className="dice-container">{diceElement}</div>
