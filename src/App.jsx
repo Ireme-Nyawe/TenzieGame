@@ -6,6 +6,7 @@ import Confetti from "react-confetti";
 export default function App() {
   const [tenzie, setTenzies] = useState(false);
   const [dice, setDice] = useState(allDice());
+  const [currentRoll, setCurrentRoll] = useState(0);
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
     const fistValue = dice[0].value;
@@ -31,16 +32,17 @@ export default function App() {
     return newDice;
   }
   function handleRoll() {
-    if(!tenzie){
+    if (!tenzie) {
       setDice((olDice) =>
-      olDice.map((die) => {
-        return die.isHeld ? die : generateNewDice();
-      })
-    );
-    }
-    else{
-      setTenzies(false)
-      setDice(allDice)
+        olDice.map((die) => {
+          return die.isHeld ? die : generateNewDice();
+        })
+      );
+      setCurrentRoll((prevRoll) => prevRoll + 1);
+    } else {
+      setTenzies(false);
+      setDice(allDice);
+      setCurrentRoll(0);
     }
   }
   function holdDie(id) {
@@ -61,20 +63,41 @@ export default function App() {
   ));
 
   return (
-        <>{tenzie && <Confetti />}
-    <div className="slide">
-      <h1>Tenzies-Game</h1>
-      <p className="instructions">
-        Roll until all dice are the same. Click each die to freeze it at its
-        current value between rolls.
-      </p>
-      <div className="dice-container">
-        {diceElement}
+    <>
+      {tenzie && <Confetti />}
+      <div className="slide">
+        <h1>Tenzies-Game</h1>
+        <p className="instructions">
+          Roll until all dice are the same. Click each die to freeze it at its
+          current value between rolls. Curent Rolls
+          <sub className="current-rolls">({currentRoll})</sub>
+        </p>
+
+        <div className="dice-container">{diceElement}</div>
+        <div className="down-part">
+          <button className="roll-button" onClick={handleRoll}>
+            {tenzie ? "New-Game" : "Roll"}
+          </button>
+          <div className="roll-wellness">
+            <h4>
+              <u>Best Rolls</u>
+            </h4>
+            <p className="">
+              <span className="well-title">Few</span>
+              <span className="well-value"> 0</span>
+            </p>
+            <p className="">
+              <span className="well-title">Many</span>
+              <span className="well-value"> 0</span>
+            </p>
+            <hr />
+            <p>
+              <span className="well-title">Current Rolls</span>
+              <span className="current-rolls"> {currentRoll}</span>
+            </p>
+          </div>
+        </div>
       </div>
-      <button className="roll-button" onClick={handleRoll}>
-        {tenzie ? "New-Game" : "Roll"}
-      </button>
-    </div>
     </>
   );
 }

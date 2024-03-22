@@ -62,3 +62,18 @@ body{
   background: #0B2434;  
 
 }
+.roll-wellness{
+  margin-left: -100%;
+  padding: 20px;
+}
+.roll-wellness h4{
+  padding: 10px 0px 10px 0px;
+}
+.well-value{
+  font-weight: bold;
+}
+.current-rolls{
+  color: #5035FF;
+  font-weight: bold;
+  padding: 5px 0px 0px 0px;
+}
