@@ -7,12 +7,24 @@ export default function App() {
   const [tenzie, setTenzies] = useState(false);
   const [dice, setDice] = useState(allDice());
   const [currentRoll, setCurrentRoll] = useState(0);
+  const [manyRolls, setManyRolls] = useState(() => {
+    return JSON.parse(localStorage.getItem("manyRolls")) || 0;
+  });
+  const [fewRolls, setFewRolls] = useState(
+    () => JSON.parse(localStorage.getItem("fewRolls")) || 0
+  );
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
     const fistValue = dice[0].value;
     const allHaveSameValue = dice.every((die) => die.value === fistValue);
     if (allHeld && allHaveSameValue) {
       setTenzies(true);
+      // best rolls manipulation
+      const savedManyRolls = localStorage.getItem("manyRolls");
+      setManyRolls(savedManyRolls);
+
+      const savedFewRolls = localStorage.getItem("fewRolls");
+      setFewRolls(savedFewRolls);
     } else {
       setTenzies(false);
     }
@@ -84,11 +96,11 @@ export default function App() {
             </h4>
             <p className="">
               <span className="well-title">Few</span>
-              <span className="well-value"> 0</span>
+              <span className="well-value"> {fewRolls}</span>
             </p>
             <p className="">
               <span className="well-title">Many</span>
-              <span className="well-value"> 0</span>
+              <span className="well-value"> {manyRolls}</span>
             </p>
             <hr />
             <p>
